@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="max-w-md mx-auto px-8 py-20">
+    <section class="glass-card rounded-2xl p-10">
+        <h1 class="text-4xl font-black text-white mb-8">Login</h1>
+
+        <form method="POST" class="space-y-5">
+            {% csrf_token %}
+
+            <input name="username" placeholder="Usuário" class="w-full bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-white">
+
+            <input name="password" type="password" placeholder="Senha" class="w-full bg-white/10 border border-white/10 rounded-xl px-5 py-3 text-white">
+
+            <button class="w-full bg-purple-500 hover:bg-purple-400 text-white px-6 py-3 rounded-xl font-bold">
+                Entrar
+            </button>
+        </form>
+
+        <p class="text-gray-400 mt-6">
+            Não tem conta?
+            <a href="{% url 'cadastro' %}" class="text-cyan-400 font-bold">Criar conta</a>
+        </p>
+    </section>
+</main>
+
+{% endblock %}

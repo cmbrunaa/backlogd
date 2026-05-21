@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="max-w-[1200px] mx-auto px-8 py-12">
+
+    <a href="{% url 'home' %}" class="text-cyan-400 hover:text-cyan-300 font-bold">
+        ← Voltar
+    </a>
+
+    <section class="mt-8 grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10">
+
+        <div class="glass-card rounded-xl overflow-hidden">
+            {% if game.imagem_url %}
+                <img
+                    src="{{ game.imagem_url }}"
+                    alt="{{ game.nome }}"
+                    class="w-full h-[520px] object-cover"
+                >
+            {% endif %}
+        </div>
+
+        <div class="glass-card rounded-xl p-8">
+
+            <div class="flex items-start justify-between gap-6">
+                <div>
+                    <h1 class="text-5xl font-black text-white mb-4">
+                        {{ game.nome }}
+                    </h1>
+
+                    <span class="inline-block bg-cyan-500 text-black text-xs px-4 py-2 rounded-full font-bold">
+                        {{ game.get_status_display }}
+                    </span>
+                </div>
+
+                {% if game.favorito %}
+                    <span class="text-yellow-400 text-3xl">⭐</span>
+                {% endif %}
+            </div>
+
+            <div class="mt-8 flex gap-4">
+                <div class="bg-white/5 rounded-xl px-6 py-4">
+                    <p class="text-gray-400 text-sm">Nota</p>
+                    <p class="text-cyan-400 text-3xl font-black">★ {{ game.nota }}</p>
+                </div>
+
+                <div class="bg-white/5 rounded-xl px-6 py-4">
+                    <p class="text-gray-400 text-sm">Favorito</p>
+                    <p class="text-white text-2xl font-black">
+                        {% if game.favorito %}Sim{% else %}Não{% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-8">
+                <h2 class="text-2xl font-black text-white mb-3">
+                    Descrição
+                </h2>
+
+                <p class="text-gray-300 leading-7">
+                    {{ game.descricao|default:"Descrição não disponível." }}
+                </p>
+            </div>
+
+            <div class="mt-8">
+                <h2 class="text-2xl font-black text-white mb-3">
+                    Minha review
+                </h2>
+
+                <p class="text-gray-300 leading-7">
+                    {{ game.review|default:"Nenhuma review cadastrada." }}
+                </p>
+            </div>
+
+            <div class="mt-10 flex gap-4">
+                <a
+                    href="{% url 'editar_game' game.id %}"
+                    class="bg-purple-500 hover:bg-purple-400 text-white px-6 py-3 rounded-xl font-bold transition"
+                >
+                    Editar
+                </a>
+
+                <a
+                    href="{% url 'deletar_game' game.id %}"
+                    class="bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white px-6 py-3 rounded-xl font-bold transition"
+                >
+                    Excluir
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+{% endblock %}
