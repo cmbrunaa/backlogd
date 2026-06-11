@@ -136,3 +136,6 @@ LOGOUT_REDIRECT_URL = '/login/'
 CSRF_TRUSTED_ORIGINS = [
     'https://backlogd-bruna-etcve6agb0g8aea2.brazilsouth-01.azurewebsites.net',
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
